@@ -2,7 +2,7 @@ import React from 'react';
 import './css/App.css';
 import axios from 'axios'
 import Header from './components/Header'
-import TodoList from './components/TodoList'
+import VisibleTodoList from './containers/VisibleTodoList'
 import AddTodo from './components/AddTodo'
 
 export default class App extends React.Component {
@@ -13,14 +13,15 @@ export default class App extends React.Component {
   // Load todos on start-up
   componentDidMount() {
     // HTTP request
-    axios.get('http://localhost:8080/todos')
+    /*axios.get('http://localhost:8080/todos')
          .then(res => {
            // local handling
            this.setState({ todos: [...res.data] });
          })
          .catch(function (error) {
            console.log(error);
-         });
+         });*/
+    
   }
   
   // Add new todo
@@ -73,11 +74,9 @@ export default class App extends React.Component {
   render() {
     return (
       <div className='app-container'>
-        <Header/>
-        <TodoList todos={this.state.todos}
-                  removeTodo={this.removeTodo}
-                  toggleTodoCompleted={this.toggleTodoCompleted}/>
-        <AddTodo addNewTodo={this.addNewTodo}/>
+        <Header />
+        <AddTodo />
+        <VisibleTodoList />
       </div>
     );
   }

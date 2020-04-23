@@ -1,41 +1,36 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React from 'react'
+import { addTodo } from '../app/actions' 
+import { connect } from 'react-redux';
 
-export default class AddTodo extends Component {
-  static propTypes = {
-    addNewTodo: PropTypes.func.isRequired    
-  }
+let AddTodo = ({ dispatch }) => {
+  let input;
 
-  state = {
-    text: ''
-  }
-
-  onSubmit = (event) => {
+  const onSubmit = (event) => {
     event.preventDefault();
-    if (this.state.text !== '') {
-      this.props.addNewTodo(this.state.text);
-      this.setState({ text: '' });
+    if (!input.value.trim()) {
+      return
     }
+    dispatch(addTodo(input.value))
+    input.value = ''
   }
-
-  onChange = (event) => {
-    this.setState({ text: event.target.value });
-  }
-
-  render() {
-    return (
-      <form onSubmit={this.onSubmit} className='add-todo-container'>
-        <input type='text'
-                name='newTodoText'
-                onChange={this.onChange}
-                value={this.state.text}
-                className='add-todo-textinput'
-        />
-        <input type='submit'
-                value='Add new todo'
-                className='add-todo-button'
-        />
-      </form>
-    )
-  }
+  
+  return (
+    <form onSubmit={onSubmit} className='add-todo-container'>
+      <input type='text'
+              className='add-todo-textinput'
+              placeholder='Add new too...'
+              ref={node => {
+                input = node
+              }}
+      />
+      <input type='submit'
+              value='Submit'
+              className='add-todo-button'
+      />
+    </form>
+  )
 }
+
+AddTodo = connect()(AddTodo);
+
+export default AddTodo;

@@ -1,27 +1,27 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import TodoItem from './TodoItem'
 
-export default class TodoList extends Component {
-  static propTypes = {
-    todos: PropTypes.array.isRequired,
-    removeTodo: PropTypes.func.isRequired,
-    toggleTodoCompleted: PropTypes.func.isRequired  
-  }
-
-  render() {
-    var todosAsLIs = [...this.props.todos.map(el => {
-      return <TodoItem key={el.id} 
-                       todo={el}
-                       toggleTodoCompleted={this.props.toggleTodoCompleted}
-                       removeTodo={this.props.removeTodo}
-             />
-    })];
-
-    return (
-      <div className='todo-list-container'>
-        {todosAsLIs}
-      </div>
-    )
-  }
+const TodoList = ({todos, onToggleTodo, onRenameTodo, onDeleteTodo}) => {
+  return (
+    <div className='todo-list-container'>
+      {[...todos.map(todo => {
+        return <TodoItem key={todo.id} 
+                         {...todo}
+                         onToggleTodo={onToggleTodo}
+                         onRenameTodo={onRenameTodo}
+                         onDeleteTodo={onDeleteTodo}
+               />
+      })]}
+    </div>
+  )
 }
+
+TodoList.propTypes = {
+  todos: PropTypes.array.isRequired,
+  onToggleTodo: PropTypes.func.isRequired,
+  onRenameTodo: PropTypes.func.isRequired,
+  onDeleteTodo: PropTypes.func.isRequired
+}
+
+export default TodoList
