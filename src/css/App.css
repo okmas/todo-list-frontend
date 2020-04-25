@@ -85,6 +85,37 @@ body {
   font-size: 20px;
 }
 
+.action-bar-container {
+  display: flex;
+}
+
+.btn-delete-all {
+  flex: 2;
+  display:inline;
+}
+
+.btn-finish-all {
+  flex: 2;
+  display: inline;
+}
+
+.filter-container {
+  flex: 6;
+  text-align: center;
+}
+
+.link-active {
+  cursor: auto;
+}
+
+.link-not-active {
+  cursor: pointer;
+}
+
+.status-bar-container {
+  text-align: center;
+}
+
 /* Customize the label (the container) */
 .checkbox-container {
   display: block;

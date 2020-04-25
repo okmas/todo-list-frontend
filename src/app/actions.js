@@ -28,6 +28,41 @@ function toggleTodo(id) {
   }
 }
 
+function checkTodo(id) {
+  return {
+    type: 'CHECK_TODO',
+    id
+  }
+}
+
+function uncheckTodo(id) {
+  return {
+    type: 'UNCHECK_TODO',
+    id
+  }
+}
+
+function checkMultipleTodos(ids) {
+  return {
+    type: 'CHECK_MULTIPLE_TODOS',
+    ids
+  }
+}
+
+function uncheckMultipleTodos(ids) {
+  return {
+    type: 'UNCHECK_MULTIPLE_TODOS',
+    ids
+  }
+}
+
+function deleteMultipleTodos(ids) {
+  return {
+    type: 'DELETE_MULTIPLE_TODOS',
+    ids
+  }
+}
+
 function setFilter(filter) {
   return {
     type: 'SET_FILTER',
@@ -39,4 +74,9 @@ export {addTodo,
         deleteTodo,
         renameTodo,
         toggleTodo,
+        checkTodo,
+        uncheckTodo,
+        checkMultipleTodos,
+        uncheckMultipleTodos,
+        deleteMultipleTodos,
         setFilter};

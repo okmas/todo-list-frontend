@@ -7,63 +7,83 @@ export class TodoItem extends React.Component {
     id: PropTypes.number.isRequired, //string
     text: PropTypes.string.isRequired,
     completed: PropTypes.bool.isRequired,
-    onToggleTodo: PropTypes.func.isRequired,
-    onRenameTodo: PropTypes.func.isRequired,
-    onDeleteTodo: PropTypes.func.isRequired
+    onCheckmarkToggled: PropTypes.func.isRequired,
+    onRenameButtonClicked: PropTypes.func.isRequired,
+    onDeleteButtonClicked: PropTypes.func.isRequired
   }
 
   constructor(props) {
     super(props);
     this.state = {
-      renameTodo: <div style={{display: 'inline'}}></div>
+      renameTodo: <span></span>,
+      renameButtonVisible: false
     }
   }
 
-  state = {
-    renameTodo: <div style={{display: 'inline'}}></div>
+  hideRenameTodo = () => {
+    this.setState({ renameTodo: <span></span> });
   }
 
-  hideRenameTodo = (id) => {
-    if (document.getElementById(`rename-${id}`)) {
-      this.setState({ renameTodo: <div style={{display: 'inline'}}></div> });
-    }
+  showRenameTodo = (id, onRenameButtonClicked) => {
+    this.setState({ renameTodo: 
+      <span id={`rename-${id}`}>
+        <RenameTodo id={id} 
+                    onSubmit={onRenameButtonClicked}
+                    destroySelf={this.hideRenameTodo}
+        />
+      </span> 
+    });
   }
-
-  toggleRenameTodo = (id, onRenameTodo) => {
+  
+  toggleRenameButton = (id, onRenameButtonClicked) => {
     if (!document.getElementById(`rename-${id}`)) {
-      this.setState({ renameTodo: 
-        <div id={`rename-${id}`} style={{display: 'inline'}}>
-          <RenameTodo id={id} 
-                      onRenameTodo={onRenameTodo}
-                      onSubmit={this.hideRenameTodo}/>
-        </div> });
+      this.showRenameTodo(id, onRenameButtonClicked);
     } else {
-      this.setState({ renameTodo: <div style={{display: 'inline'}}></div> });
+      this.hideRenameTodo();
     }
+  }
+
+  onMouseEnter = () => {
+    this.setState({ renameButtonVisible: true });
+  } 
+
+  onMouseLeave = () => {
+    this.setState({ 
+      renameTodo: <span></span>,
+      renameButtonVisible: false
+    });
+  } 
+
+  getRenameButton = (id, onRenameButtonClicked) => {
+    return (this.state.renameButtonVisible)
+      ? <button className='button-rename'
+                onClick={() => this.toggleRenameButton(id, onRenameButtonClicked)}
+        >{'<-'}</button>
+      : <span></span>
   }
 
   render() {
     const { id, text, completed, 
-            onToggleTodo, 
-            onRenameTodo, 
-            onDeleteTodo} = this.props;
+            onCheckmarkToggled, 
+            onRenameButtonClicked, 
+            onDeleteButtonClicked} = this.props;
     
     return (
-      <div className={'todo-item-container' + ((completed) ? ' completed' : '')}>
+      <div className={'todo-item-container' + ((completed) ? ' completed' : '')}
+           onMouseEnter={this.onMouseEnter}
+           onMouseLeave={this.onMouseLeave}>
         <label className='checkbox-container'>
           <input type='checkbox' 
-                  defaultChecked={(completed) ? 'checked' : ''} 
-                  onChange={() => onToggleTodo(id)}
+                  checked={(completed) ? 'checked' : ''} 
+                  onChange={() => onCheckmarkToggled(id)}
           />
           <span className='checkmark'></span>
         </label>
         <p>{text}</p>
-        <button className='button-rename'
-                onClick={() => this.toggleRenameTodo(id, onRenameTodo)}
-        >{'<-'}</button>
+        {this.getRenameButton(id, onRenameButtonClicked)}
         {this.state.renameTodo}
         <button className='button-delete'
-                onClick={() => onDeleteTodo(id)}
+                onClick={() => onDeleteButtonClicked(id)}
         >X</button>
       </div>
     )

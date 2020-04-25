@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-//import { createStore } from 'redux'
 import './css/index.css';
 import store from './app/store'
 import App from './App';
@@ -13,11 +12,13 @@ store.subscribe(() => {
   console.table(store.getState().todos);
 });
 
-  store.dispatch(addTodo('One'));
-  store.dispatch(addTodo('Two'));
-  store.dispatch(addTodo('Ďeveť'));
-  store.dispatch(toggleTodo(2));
-  store.dispatch(addTodo('Päť'));
+for(let i=0; i<7; ++i) {
+  store.dispatch(addTodo(`Todo ${i}`));
+}
+store.dispatch(toggleTodo(2));
+store.dispatch(toggleTodo(3));
+store.dispatch(toggleTodo(5));
+//store.dispatch(setFilter('SHOW_UNCHECKED'));
 
 ReactDOM.render(
   <React.StrictMode>
@@ -27,3 +28,5 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
+
+document.getElementById('add-todo-input').focus();

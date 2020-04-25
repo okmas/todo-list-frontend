@@ -1,19 +1,19 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const RenameTodo = ({id, onRenameTodo, onSubmit}) => {
-  const onClick = event => {
+const RenameTodo = ({ id, destroySelf, onSubmit }) => {
+  const onFormSubmitted = event => {
     event.preventDefault();
     let newText = event.target.newText.value;
     if (newText !== '') {
-      onRenameTodo(id, newText);
-      onSubmit(id);
+      onSubmit(id, newText);
+      destroySelf();
     }
   }
   
   return (
     <form style={{display: 'inline'}}
-          onSubmit={onClick}>
+          onSubmit={onFormSubmitted}>
       <input type='text'
               name='newText'
               placeholder='Add new name...'
@@ -27,7 +27,7 @@ const RenameTodo = ({id, onRenameTodo, onSubmit}) => {
 
 RenameTodo.propTypes = {
   id: PropTypes.number.isRequired, //string
-  onRenameTodo: PropTypes.func.isRequired,
+  destroySelf: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired
 }
 

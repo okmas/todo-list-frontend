@@ -3,15 +3,15 @@ import { addTodo } from '../app/actions'
 import { connect } from 'react-redux';
 
 let AddTodo = ({ dispatch }) => {
-  let input;
+  var textInput = null;
 
   const onSubmit = (event) => {
     event.preventDefault();
-    if (!input.value.trim()) {
-      return
+    if (textInput.value.trim() !== '') {
+      dispatch(addTodo(textInput.value));
+      textInput.value = '';
+      textInput.focus();
     }
-    dispatch(addTodo(input.value))
-    input.value = ''
   }
   
   return (
@@ -19,9 +19,8 @@ let AddTodo = ({ dispatch }) => {
       <input type='text'
               className='add-todo-textinput'
               placeholder='Add new too...'
-              ref={node => {
-                input = node
-              }}
+              id='add-todo-input'
+              ref={el => {textInput = el}}
       />
       <input type='submit'
               value='Submit'
