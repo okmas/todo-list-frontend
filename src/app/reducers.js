@@ -1,17 +1,16 @@
+import { combineReducers } from 'redux'
+
 function todos(state = [], action) {
   switch (action.type) {
     case 'ADD_TODO':
-      console.log('Adding todo', action.text);
       return [...state, Object.assign({}, {
-        id: (state.length === 0) ? 0 : state[state.length-1].id+1,
-        text: action.text,
-        completed: false
+        id: action.newTodo.id,
+        text: action.newTodo.text,
+        completed: action.newTodo.completed
       })];
     case 'DELETE_TODO':
-      console.log('Deleting todo', action.id);
       return state.filter(el => action.id !== el.id);
     case 'RENAME_TODO':
-      console.log('Renaming todo');
       return state.map(el => {
         if (el.id === action.id) {
           return Object.assign({}, el, {
@@ -21,7 +20,6 @@ function todos(state = [], action) {
         return el;
       });
     case 'TOGGLE_TODO':
-      console.log('Toggling todo', action.id);
       return state.map(el => {
         if (el.id === action.id) {
           return Object.assign({}, el, {
@@ -31,7 +29,6 @@ function todos(state = [], action) {
         return el;
       });
     case 'CHECK_TODO':
-      console.log('Checking todo', action.id);
       return state.map(el => {
         if (el.id === action.id) {
           return Object.assign({}, el, {
@@ -41,7 +38,6 @@ function todos(state = [], action) {
         return el;
       });
     case 'UNCHECK_TODO':
-      console.log('Unchecking todo', action.id);
       return state.map(el => {
         if (el.id === action.id) {
           return Object.assign({}, el, {
@@ -51,7 +47,6 @@ function todos(state = [], action) {
         return el;
       });
     case 'CHECK_MULTIPLE_TODOS':
-      console.log('Checking multiple todos', action.ids);
       return state.map(el => {
         if (action.ids.includes(el.id)) {
           return Object.assign({}, el, {
@@ -61,7 +56,6 @@ function todos(state = [], action) {
         return el;
       });
     case 'UNCHECK_MULTIPLE_TODOS':
-      console.log('Unchecking multiple todos', action.ids);
       return state.map(el => {
         if (action.ids.includes(el.id)) {
           return Object.assign({}, el, {
@@ -71,7 +65,6 @@ function todos(state = [], action) {
         return el;
       });
     case 'DELETE_MULTIPLE_TODOS':
-      console.log('Deleting multiple todos', action.ids);
       return state.filter(el => !action.ids.includes(el.id));
     
     default:
@@ -88,12 +81,9 @@ function filter(state = 'SHOW_ALL', action) {
   return state;
 }
 
-function todoApp(state = {}, action) {
-  console.table(action);
-  return {
-    todos: todos(state.todos, action),
-    filter: filter(state.filter, action)
-  }
-}
+const todoApp = combineReducers({
+  todos,
+  filter
+})
 
 export default todoApp;

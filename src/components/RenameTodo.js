@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const RenameTodo = ({ id, destroySelf, onSubmit }) => {
+function RenameTodo({ id, destroySelf, onSubmit }) {
   const onFormSubmitted = event => {
     event.preventDefault();
     let newText = event.target.newText.value;
@@ -26,7 +26,7 @@ const RenameTodo = ({ id, destroySelf, onSubmit }) => {
 }
 
 RenameTodo.propTypes = {
-  id: PropTypes.number.isRequired, //string
+  id: PropTypes.string.isRequired,
   destroySelf: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired
 }

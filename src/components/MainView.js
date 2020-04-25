@@ -4,34 +4,37 @@ import ActionBar from './ActionBar'
 import StatusBar from './StatusBar'
 import TodoList from './TodoList'
 
-export const getVisibleTodos = (todos, filter) => {
-  switch (filter) {
-    case 'SHOW_ALL':
-      return todos;
-    case 'SHOW_CHECKED':
-      return todos.filter(t => t.completed);
-    case 'SHOW_UNCHECKED':
-      return todos.filter(t => !t.completed);
-    default:
-      throw new Error('Unknown filter ' + filter);
+function MainView({ todos, filter, toggleTodo, renameTodo, deleteTodo, checkTodo }) {
+
+  const getVisibleTodos = () => {
+    switch (filter) {
+      case 'SHOW_ALL':
+        return todos;
+      case 'SHOW_CHECKED':
+        return todos.filter(t => t.completed);
+      case 'SHOW_UNCHECKED':
+        return todos.filter(t => !t.completed);
+      default:
+        throw new Error('Unknown filter ' + filter);
+    }
   }
-}
+  
+  const getCompletedTodos = () => {
+    return todos.filter(todo => todo.completed);
+  }
 
-const getCompletedTodos = (todos) => {
-  return todos.filter(todo => todo.completed);
-}
+  const onCheckAllVisible = () => {
+    getVisibleTodos().forEach(todo => {if(!todo.completed) checkTodo(todo.id)});
+  }
 
-const getIdsOfTodos = (todos) => {
-  return todos.map(todo => todo.id);
-}
+  const onDeleteAllCompleted = () => {
+    getCompletedTodos().forEach(todo => deleteTodo(todo.id));
+  }
 
-function MainView({ todos, filter, toggleTodo, renameTodo, 
-                    deleteTodo, checkMultipleTodos, deleteMultipleTodos }) {
   return (
     <div className='main-view-container'>
-      <ActionBar onCheckAllVisible={() => {checkMultipleTodos(getIdsOfTodos(getVisibleTodos(todos, filter)))}}
-                 onDeleteAllCompleted={() => {deleteMultipleTodos(getIdsOfTodos(getCompletedTodos(todos)))}}
-                 filter={filter}
+      <ActionBar onCheckAllVisible={() => onCheckAllVisible()}
+                 onDeleteAllCompleted={() => onDeleteAllCompleted()}
       />
       <StatusBar numVisibleTodos={getVisibleTodos(todos, filter).length}
                  numAllTodos={todos.length}
@@ -49,7 +52,7 @@ function MainView({ todos, filter, toggleTodo, renameTodo,
 MainView.propTypes = {
   todos: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number.isRequired, //string
+      id: PropTypes.string.isRequired,
       text: PropTypes.string.isRequired,
       completed: PropTypes.bool.isRequired
     }).isRequired
@@ -58,8 +61,7 @@ MainView.propTypes = {
   toggleTodo: PropTypes.func.isRequired,
   renameTodo: PropTypes.func.isRequired,
   deleteTodo: PropTypes.func.isRequired,
-  checkMultipleTodos: PropTypes.func.isRequired,
-  deleteMultipleTodos: PropTypes.func.isRequired,
+  checkTodo: PropTypes.func.isRequired
 }
 
 export default MainView

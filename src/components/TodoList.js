@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import TodoItem from './TodoItem'
 
-const TodoList = ({todos, onCheckmarkToggled, onRenameButtonClicked, onDeleteButtonClicked}) => {
+function TodoList({todos, onCheckmarkToggled, onRenameButtonClicked, onDeleteButtonClicked}) {
   return (
     <div className='todo-list-container'>
       {[...todos.map(todo => {
@@ -20,7 +20,7 @@ const TodoList = ({todos, onCheckmarkToggled, onRenameButtonClicked, onDeleteBut
 TodoList.propTypes = {
   todos: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number.isRequired, //string
+      id: PropTypes.string.isRequired,
       text: PropTypes.string.isRequired,
       completed: PropTypes.bool.isRequired
     }).isRequired

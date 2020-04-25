@@ -1,14 +1,14 @@
 import React from 'react'
-import { addTodo } from '../app/actions' 
+import { addTodo_Remote } from '../app/actions' 
 import { connect } from 'react-redux';
 
 let AddTodo = ({ dispatch }) => {
-  var textInput = null;
+  let textInput = null;
 
   const onSubmit = (event) => {
     event.preventDefault();
     if (textInput.value.trim() !== '') {
-      dispatch(addTodo(textInput.value));
+      dispatch(addTodo_Remote(textInput.value));
       textInput.value = '';
       textInput.focus();
     }

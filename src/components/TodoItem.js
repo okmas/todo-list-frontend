@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import RenameTodo from './RenameTodo';
 
-export class TodoItem extends React.Component {
+class TodoItem extends React.Component {
   static propTypes = {
-    id: PropTypes.number.isRequired, //string
+    id: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
     completed: PropTypes.bool.isRequired,
     onCheckmarkToggled: PropTypes.func.isRequired,
