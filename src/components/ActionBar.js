@@ -5,9 +5,17 @@ import FilterContainer from '../containers/FilterContainer'
 function ActionBar({ onCheckAllVisible, onDeleteAllCompleted }) {
   return (
     <div className='action-bar-container'>
-      <button id='btn-finish-all' onClick={() => onCheckAllVisible()}>Finish All Visible</button>
+      <button 
+        id='btn-finish-all' 
+        onClick={() => onCheckAllVisible()}>
+        Finish All Visible
+      </button>
       <FilterContainer />
-      <button id='btn-delete-all' onClick={() => onDeleteAllCompleted()}>Remove All Completed</button>
+      <button 
+        id='btn-delete-all' 
+        onClick={() => onDeleteAllCompleted()}>
+        Remove All Completed
+      </button>
     </div>
   )
 }

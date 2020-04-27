@@ -26,8 +26,7 @@ class TodoItem extends React.Component {
   } 
 
   onMouseLeave = () => {
-    this.setState({ 
-      renameTodo: <span></span>,
+    this.setState({
       renameButtonVisible: false
     });
   } 
@@ -43,37 +42,43 @@ class TodoItem extends React.Component {
     } = this.props;
     
     let renameTodo = (showRenameTodo)
-      ? <span id={`rename-${id}`}>
-          <RenameTodo id={id} 
-                      onSubmit={onRenameButtonClicked}
-                      destroySelf={() => onEditButtonClicked(id)}
-          />
-        </span>
+      ? <RenameTodo 
+          id={id} 
+          onSubmit={onRenameButtonClicked}
+          destroySelf={() => onEditButtonClicked(id)}
+        />
       : <span></span> 
 
     let renameToggle = (this.state.renameButtonVisible)
-      ? <button className='btn-edit'
-                onClick={() => onEditButtonClicked(id)}
-        >{'<-'}</button>
+      ? <button 
+          className='btn-edit'
+          onClick={() => onEditButtonClicked(id)}>
+          {'<-'}
+        </button>
       : <span></span>
     
     return (
-      <div className={'todo-container' + ((completed) ? ' todo-completed' : '')}
-           onMouseEnter={this.onMouseEnter}
-           onMouseLeave={this.onMouseLeave}>
+      <div 
+        className={'todo-container' + ((completed) ? ' todo-completed' : '')}
+        onMouseEnter={this.onMouseEnter}
+        onMouseLeave={this.onMouseLeave}
+      >
         <label className='checkbox-container'>
-          <input type='checkbox' 
-                  checked={(completed) ? 'checked' : ''} 
-                  onChange={() => onCheckmarkToggled(id)}
+          <input 
+            type='checkbox'
+            checked={(completed) ? 'checked' : ''}
+            onChange={() => onCheckmarkToggled(id)}
           />
           <span className='checkmark'></span>
         </label>
         <p>{text}</p>
         {renameToggle}
         {renameTodo}
-        <button className='btn-delete'
-                onClick={() => onDeleteButtonClicked(id)}
-        >X</button>
+        <button 
+          className='btn-delete'
+          onClick={() => onDeleteButtonClicked(id)}>
+          X
+        </button>
       </div>
     )
   }
