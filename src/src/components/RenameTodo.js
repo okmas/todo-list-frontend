@@ -31,7 +31,7 @@ function RenameTodo({ id, destroySelf, onSubmit }) {
 }
 
 RenameTodo.propTypes = {
-  id: PropTypes.number.isRequired, //string in online version
+  id: PropTypes.string.isRequired,
   destroySelf: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired
 }

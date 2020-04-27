@@ -16,14 +16,16 @@ let AddTodo = ({ dispatch }) => {
   
   return (
     <form onSubmit={onSubmit} className='add-todo-container'>
-      <input type='text'
-             placeholder='Add new too...'
-             id='add-todo-textinput'
-             ref={el => {textInput = el}}
+      <input 
+        type='text'
+        placeholder='Add new too...'
+        id='add-todo-textinput'
+        ref={el => {textInput = el}}
       />
-      <input type='submit'
-             value='Submit'
-             className='add-todo-btn'
+      <input 
+        type='submit'
+        value='Submit'
+        className='add-todo-btn'
       />
     </form>
   )
