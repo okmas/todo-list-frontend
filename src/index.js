@@ -4,9 +4,9 @@ import { Provider } from 'react-redux'
 import './css/index.css'
 import store from './app/store'
 import App from './App'
-import { fetchAllTodos_Remote } from './app/actions'
+import { fetchAllTodos } from './app/actions'
 
-store.dispatch(fetchAllTodos_Remote());
+store.dispatch(fetchAllTodos());
 
 ReactDOM.render(
   <React.StrictMode>
@@ -17,4 +17,4 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-document.getElementById('add-todo-input').focus();
+document.getElementById('add-todo-textinput').focus();

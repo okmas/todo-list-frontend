@@ -46,26 +46,6 @@ function todos(state = [], action) {
         }
         return el;
       });
-    case 'CHECK_MULTIPLE_TODOS':
-      return state.map(el => {
-        if (action.ids.includes(el.id)) {
-          return Object.assign({}, el, {
-            completed: true
-          });
-        }
-        return el;
-      });
-    case 'UNCHECK_MULTIPLE_TODOS':
-      return state.map(el => {
-        if (action.ids.includes(el.id)) {
-          return Object.assign({}, el, {
-            completed: false
-          });
-        }
-        return el;
-      });
-    case 'DELETE_MULTIPLE_TODOS':
-      return state.filter(el => !action.ids.includes(el.id));
     
     default:
       return state;
@@ -81,9 +61,20 @@ function filter(state = 'SHOW_ALL', action) {
   return state;
 }
 
+function idOfEdit(state = "", action) {
+  if (action.type === 'TOGGLE_EDIT_FIELD') {
+    if (state === action.id) {
+      return "";
+    }
+    return action.id;
+  }
+  return state;
+}
+
 const todoApp = combineReducers({
   todos,
-  filter
+  filter,
+  idOfEdit
 })
 
 export default todoApp;

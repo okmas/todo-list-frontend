@@ -1,24 +1,27 @@
 import { connect } from 'react-redux'
 import MainView from '../components/MainView'
 import { 
-  renameTodo_Remote, 
-  deleteTodo_Remote,
-  toggleTodo_Remote,
-  checkTodo_Remote
+  renameTodo, 
+  deleteTodo,
+  toggleTodo,
+  checkTodo,
+  toggleEditField
 } from '../app/actions'
 
 const mapStateToProps = state => ({
   todos: state.todos,
-  filter: state.filter
+  filter: state.filter,
+  idOfEdit: state.idOfEdit
 })
 
-const mapDispatchToProps = dispatch => ({
-  toggleTodo: id => dispatch(toggleTodo_Remote(id)),
-  renameTodo: (id, text) => dispatch(renameTodo_Remote(id, text)),
-  deleteTodo: id => dispatch(deleteTodo_Remote(id)),
-  checkTodo: id => dispatch(checkTodo_Remote(id))
-})
+const actionCreators = {
+  renameTodo, 
+  deleteTodo,
+  toggleTodo,
+  checkTodo,
+  toggleEditField
+}
 
-const MainViewContainer = connect(mapStateToProps, mapDispatchToProps)(MainView);
+const MainViewContainer = connect(mapStateToProps, actionCreators)(MainView);
 
 export default MainViewContainer;

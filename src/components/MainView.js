@@ -4,7 +4,8 @@ import ActionBar from './ActionBar'
 import StatusBar from './StatusBar'
 import TodoList from './TodoList'
 
-function MainView({ todos, filter, toggleTodo, renameTodo, deleteTodo, checkTodo }) {
+function MainView({ todos, filter, idOfEdit, toggleTodo, renameTodo, deleteTodo, 
+  checkTodo, toggleEditField}) {
 
   const getVisibleTodos = () => {
     switch (filter) {
@@ -41,9 +42,11 @@ function MainView({ todos, filter, toggleTodo, renameTodo, deleteTodo, checkTodo
                  numCompleted={todos.reduce((sum, todo) => (todo.completed) ? ++sum : sum, 0)}
       />
       <TodoList todos={getVisibleTodos(todos, filter)}
+                idOfEdit={idOfEdit}
                 onCheckmarkToggled={toggleTodo}
                 onRenameButtonClicked={renameTodo}
                 onDeleteButtonClicked={deleteTodo}
+                onEditButtonClicked={toggleEditField}
       />
     </div>
   )
@@ -58,10 +61,12 @@ MainView.propTypes = {
     }).isRequired
   ).isRequired,
   filter: PropTypes.string.isRequired,
+  idOfEdit: PropTypes.string.isRequired,
   toggleTodo: PropTypes.func.isRequired,
   renameTodo: PropTypes.func.isRequired,
   deleteTodo: PropTypes.func.isRequired,
-  checkTodo: PropTypes.func.isRequired
+  checkTodo: PropTypes.func.isRequired,
+  toggleEditField: PropTypes.func.isRequired
 }
 
 export default MainView

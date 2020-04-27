@@ -33,39 +33,13 @@ body {
   color: #777;
 }
 
-.todo-item-container {
-  padding: 5px 10px 5px 5px;
-  height: 30px;
-  border: 1px solid black;
-}
-
-.todo-item-container p {
-  display: inline;
-  margin: auto 40px;
-  padding: auto 0;
-}
-
-.completed {
-  text-decoration: line-through;
-}
-
-.button-delete {
-  background: #b22;
-  color: #eee;
-  float: right;
-  cursor: pointer;
-  height: 25px;
-  border-radius: 5px;
-  margin: auto 0px;
-}
-
 .add-todo-container {
   display: flex;
   height: 30px;
   margin-bottom: 20px;
 }
 
-.add-todo-button {
+.add-todo-btn {
   flex: 3;
   background: #cdcdcd;
   height: 50px;
@@ -75,7 +49,7 @@ body {
   cursor: pointer;
 }
 
-.add-todo-textinput {
+#add-todo-textinput {
   flex: 10;
   height: 30px;
   border: none;
@@ -83,6 +57,11 @@ body {
   background: #cdcdcd; 
   color: #222;
   font-size: 20px;
+}
+
+#add-todo-textinput:focus {
+  outline: none;
+  border: 2px orange dashed;
 }
 
 .action-bar-container {
@@ -114,6 +93,40 @@ body {
 
 .status-bar-container {
   text-align: center;
+}
+
+.todo-container {
+  padding: 5px 10px 5px 5px;
+  height: 30px;
+  border: 1px solid black;
+}
+
+.todo-container p {
+  display: inline;
+  margin: auto 40px;
+  padding: auto 0;
+}
+
+.todo-completed {
+  text-decoration: line-through;
+}
+
+.btn-delete {
+  background: #b22;
+  color: #eee;
+  float: right;
+  cursor: pointer;
+  height: 25px;
+  border-radius: 5px;
+  margin: auto 0px;
+}
+
+.btn-edit {
+  color: blue;
+}
+
+.btn-rename {
+  color: red;
 }
 
 /* Customize the label (the container) */
@@ -161,7 +174,7 @@ body {
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
-.checkmark:after {
+.checkbox-container .checkmark:after {
   content: "";
   position: absolute;
   display: none;

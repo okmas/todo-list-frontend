@@ -1,5 +1,5 @@
 import React from 'react'
-import { addTodo_Remote } from '../app/actions' 
+import { addTodo } from '../app/actions' 
 import { connect } from 'react-redux';
 
 let AddTodo = ({ dispatch }) => {
@@ -8,7 +8,7 @@ let AddTodo = ({ dispatch }) => {
   const onSubmit = (event) => {
     event.preventDefault();
     if (textInput.value.trim() !== '') {
-      dispatch(addTodo_Remote(textInput.value));
+      dispatch(addTodo(textInput.value));
       textInput.value = '';
       textInput.focus();
     }
@@ -16,15 +16,16 @@ let AddTodo = ({ dispatch }) => {
   
   return (
     <form onSubmit={onSubmit} className='add-todo-container'>
-      <input type='text'
-              className='add-todo-textinput'
-              placeholder='Add new too...'
-              id='add-todo-input'
-              ref={el => {textInput = el}}
+      <input 
+        type='text'
+        placeholder='Add new too...'
+        id='add-todo-textinput'
+        ref={el => {textInput = el}}
       />
-      <input type='submit'
-              value='Submit'
-              className='add-todo-button'
+      <input 
+        type='submit'
+        value='Submit'
+        className='add-todo-btn'
       />
     </form>
   )
