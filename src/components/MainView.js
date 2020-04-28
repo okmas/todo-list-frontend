@@ -5,7 +5,7 @@ import StatusBar from './StatusBar'
 import TodoList from './TodoList'
 
 function MainView({ todos, filter, idOfEdit, toggleTodo, renameTodo, deleteTodo, 
-  checkTodo, toggleEditField}) {
+  checkTodo, uncheckTodo, toggleEditField}) {
 
   const getVisibleTodos = () => {
     switch (filter) {
@@ -28,25 +28,37 @@ function MainView({ todos, filter, idOfEdit, toggleTodo, renameTodo, deleteTodo,
     getVisibleTodos().forEach(todo => {if(!todo.completed) checkTodo(todo.id)});
   }
 
+  const onUncheckAllVisible = () => {
+    getVisibleTodos().forEach(todo => {if(todo.completed) uncheckTodo(todo.id)});
+  }
+
   const onDeleteAllCompleted = () => {
     getCompletedTodos().forEach(todo => deleteTodo(todo.id));
   }
 
+  const shouldCheckAll = () => {
+    return !getVisibleTodos().reduce(
+      (prev, curr) => prev && curr.completed,
+      true
+    );
+  }
+
   return (
-    <div className='main-view-container'>
+    <div id='main-view'>
       <ActionBar onCheckAllVisible={() => onCheckAllVisible()}
+                 onUncheckAllVisible={() => onUncheckAllVisible()}
                  onDeleteAllCompleted={() => onDeleteAllCompleted()}
-      />
-      <StatusBar numVisibleTodos={getVisibleTodos(todos, filter).length}
-                 numAllTodos={todos.length}
-                 numCompleted={todos.reduce((sum, todo) => (todo.completed) ? ++sum : sum, 0)}
+                 shouldCheckAll={shouldCheckAll()} // allows to toggle functionality between 'Check All' and 'Uncheck All'
       />
       <TodoList todos={getVisibleTodos(todos, filter)}
-                idOfEdit={idOfEdit}
+                idOfEdit={idOfEdit} // ID of todo, which is showing a RenameTodo dialog – only one can be shown
                 onCheckmarkToggled={toggleTodo}
                 onRenameButtonClicked={renameTodo}
                 onDeleteButtonClicked={deleteTodo}
                 onEditButtonClicked={toggleEditField}
+      />
+      <StatusBar numAllTodos={todos.length}
+                 numCompleted={todos.reduce((sum, todo) => (todo.completed) ? ++sum : sum, 0)}
       />
     </div>
   )
@@ -66,6 +78,7 @@ MainView.propTypes = {
   renameTodo: PropTypes.func.isRequired,
   deleteTodo: PropTypes.func.isRequired,
   checkTodo: PropTypes.func.isRequired,
+  uncheckTodo: PropTypes.func.isRequired,
   toggleEditField: PropTypes.func.isRequired
 }
 

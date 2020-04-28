@@ -3,11 +3,18 @@ import { combineReducers } from 'redux'
 function todos(state = [], action) {
   switch (action.type) {
     case 'ADD_TODO':
+      // Online version
       return [...state, Object.assign({}, {
         id: action.newTodo.id,
         text: action.newTodo.text,
         completed: action.newTodo.completed
       })];
+      // Offline version
+      // return [...state, Object.assign({}, {
+      //   id: (state.length > 0) ? state[state.length-1].id + 1 : 0,
+      //   text: action.newTodo,
+      //   completed: false
+      // })];
     case 'DELETE_TODO':
       return state.filter(el => action.id !== el.id);
     case 'RENAME_TODO':

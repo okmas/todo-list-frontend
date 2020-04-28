@@ -13,19 +13,20 @@ function RenameTodo({ id, destroySelf, onSubmit }) {
   
   return (
     <form 
-      className='rename-todo-container'
+      className='rename-todo'
       style={{display: 'inline'}} 
       onSubmit={onFormSubmitted}
     >
       <input type='text'
         name='newText'
-        className='rename-textinput'
         placeholder='Add new name...'
       />
-      <input type='submit'
-        className='btn-rename'
-        value='R'
-      />
+      <button className='btn-rename'>
+        Submit
+      </button>
+      <span onClick={() => destroySelf()}> {/* button for closing the dialog */}
+        <i className="fas fa-times-circle"></i>
+      </span>
     </form>
   )
 }

@@ -2,30 +2,47 @@ import React from 'react'
 import { addTodo } from '../app/actions' 
 import { connect } from 'react-redux';
 
-let AddTodo = ({ dispatch }) => {
-  let textInput = null;
+const placeholders = [
+  `What needs to get done?`,
+  `Tell me the next thing to do...`,
+  `What's on your mind?`,
+  `Let's get this going...`,
+  `Next task to do is...`
+]
 
-  const onSubmit = (event) => {
-    event.preventDefault();
-    if (textInput.value.trim() !== '') {
-      dispatch(addTodo(textInput.value));
-      textInput.value = '';
-      textInput.focus();
+let textInput = null;
+
+class AddTodo extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      placeholder: placeholders[Math.floor(Math.random() * placeholders.length)]
     }
   }
-  
-  return (
-    <form onSubmit={onSubmit} className='add-todo-container'>
+
+  onSubmit(event) {
+    event.preventDefault();
+    if (textInput.value.trim() !== '') {
+      this.props.dispatch(addTodo(textInput.value));
+      textInput.value = '';
+      textInput.focus();
+      this.setState({
+        placeholder: placeholders[Math.floor(Math.random() * placeholders.length)]
+      });
+    }
+  }
+
+  render = () => (
+    <form onSubmit={(event) => {this.onSubmit(event)}} id='add-todo'>
       <input 
         type='text'
-        placeholder='Add new too...'
-        id='add-todo-textinput'
+        placeholder={this.state.placeholder}
         ref={el => {textInput = el}}
       />
       <input 
+        id='btn-add-todo'
         type='submit'
-        value='Submit'
-        className='add-todo-btn'
+        value='Add'
       />
     </form>
   )

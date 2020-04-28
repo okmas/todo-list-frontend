@@ -118,6 +118,18 @@ const uncheckTodo = (id) => dispatch =>
     .then(() => dispatch(uncheckTodo_Sync(id)))
     .catch(error => console.log(error));
 
+
+// "ASYNCHRONOUS" ACTION CREATORS FOR THE OFFLINE VERSION
+
+// const fetchAllTodos = () => {};
+// const fetchAllCompletedTodos = () => {};
+// const addTodo = addTodo_Sync;
+// const renameTodo = renameTodo_Sync;
+// const deleteTodo = deleteTodo_Sync;
+// const toggleTodo = toggleTodo_Sync;
+// const checkTodo = checkTodo_Sync;
+// const uncheckTodo = uncheckTodo_Sync;
+
 export {
   fetchAllTodos,
   fetchAllCompletedTodos,

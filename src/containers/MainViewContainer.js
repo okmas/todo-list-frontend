@@ -5,6 +5,7 @@ import {
   deleteTodo,
   toggleTodo,
   checkTodo,
+  uncheckTodo,
   toggleEditField
 } from '../app/actions'
 
@@ -19,6 +20,7 @@ const actionCreators = {
   deleteTodo,
   toggleTodo,
   checkTodo,
+  uncheckTodo,
   toggleEditField
 }
 

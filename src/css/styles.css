@@ -1,0 +1,467 @@
+@font-face {
+  font-family: Allura;
+  src: url('../assets/Allura-Regular.ttf');
+}
+
+@font-face {
+  font-family: KalamLight;
+  src: url('../assets/Kalam-Light.ttf');
+}
+
+@font-face {
+  font-family: KalamRegular;
+  src: url('../assets/Kalam-Regular.ttf');
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: sans-serif, Arial, Helvetica;
+  font-family: KalamLight;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background: url(../assets/background.jpg) repeat-y top;
+  background-color: hsl(135, 30%, 30%);
+  background-size: auto;
+}
+
+#app {
+  border: 3px solid hsla(135, 20%, 20%, 1);
+  background-color: hsla(135, 20%, 20%, 0.8);
+  height: 100%;
+  border-radius: 40px 40px 10px 10px;
+  /* overflow: hidden; */
+}
+
+#header {
+  font-family: Allura;
+  text-align: center;
+}
+
+#header h1 {
+  color: hsl(36, 50%, 65%);
+  padding: 10px 0 5px 0;
+  font-size: 3.2em;
+}
+
+#header h2 {
+  color: hsl(0, 0%, 67%);
+  padding: 0 0 10px 0;
+  font-size: 1.7em;
+}
+
+[id^=btn] {
+  color: hsl(0, 0%, 29%);
+  background: hsl(36, 50%, 85%);
+  border: 3px solid hsl(0, 0%, 29%) !important;
+
+  padding: 0.6em;
+  min-width: 7.5em;
+  
+  font-family: KalamRegular;
+  font-size: 0.8em;
+  
+  border-radius: 15px;
+  cursor: pointer;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.2s ease 0s;
+}
+
+[id^=btn]:hover {
+  color: #fff !important;
+  background: hsl(36, 50%, 70%);
+  border-color: hsl(40, 70%, 60%) !important;
+  transition: all 0.2s ease 0s;
+}
+
+[id^=btn]:focus {
+  outline: none;
+}
+
+[class^=btn] {
+  cursor: pointer;
+  transition: all 0.2s ease 0s;
+}
+
+[class^=btn]:hover {
+  color: hsl(36, 50%, 30%);
+  transition: all 0.2s ease 0s;
+}
+
+[class^=btn]:focus {
+  outline: none;
+}
+
+#add-todo {
+  background: -webkit-linear-gradient(hsla(135, 20%, 20%, 0), hsla(135, 20%, 20%, 0.6));
+  background: linear-gradient(hsla(135, 20%, 20%, 0), hsla(135, 20%, 20%, 0.6));
+  padding: 2% 5%;
+}
+
+/* underline under text input */
+#add-todo:after {
+  border: 0.5px solid hsl(135, 80%, 10%);
+  content: '';
+
+  position: relative;
+  display: block;
+  left: 0;
+  top: 2px;
+
+  width: 70%;
+  height: 0;
+} 
+
+#add-todo input[type=text] {
+  border: none;
+  background: none; 
+  color: hsl(36, 50%, 70%);
+  caret-color: hsl(135, 80%, 10%);
+
+  width: 70%;
+
+  font-family: KalamRegular;
+  font-size: 1.3em;
+}
+
+#add-todo input[type=text]:focus {
+  outline: none;
+}
+
+#add-todo input[type=text]::-webkit-input-placeholder { /* Edge */
+  color: hsl(0, 0%, 67%);
+}
+
+#add-todo input[type=text]:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: hsl(0, 0%, 67%);
+}
+
+#add-todo input[type=text]::placeholder {
+  color: hsl(0, 0%, 67%);
+}
+
+#add-todo input[type=submit] {
+  position: relative;
+  top: -0.3em;
+
+  width: 24.4%;
+  margin: 0 0 0 5.6%;
+}
+
+#action-bar {
+  background: -webkit-linear-gradient(hsla(135, 20%, 20%, 0.6), hsla(135, 20%, 20%, 0.9));
+  background: linear-gradient(hsla(135, 20%, 20%, 0.6), hsla(135, 20%, 20%, 0.9));
+  padding: 0 5%;
+  display: flex;
+  justify-content: space-between;
+}
+
+#btn-toggle-all {
+  border: 2px solid hsl(36, 50%, 85%);
+  width: 24.4%;
+  padding: 0.25em 0.6em;
+}
+
+#btn-remove-completed {
+  border: 2px solid hsl(36, 50%, 85%);
+  float: right;
+  width: 24.4%;
+  padding: 0.25em 0.6em;
+}
+
+#filter {
+  color: hsl(0, 0%, 67%);
+  position: relative;
+  top: 0.2em;
+  width: 50%;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.85em;
+  cursor: pointer;
+}
+
+#filter p {
+  font-family: KalamRegular;
+  text-decoration: underline;
+}
+
+#filter > span {
+  position: relative;
+  top: 0.2em;
+}
+
+.link {
+  margin: 0 2%;
+  font-family: KalamRegular;
+  cursor: pointer;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.link-active {
+  cursor: default;
+}
+
+.link-active:hover {
+  text-decoration: none;
+}
+
+#status-bar {
+  color: hsl(0, 0%, 67%);
+  background: hsla(135, 20%, 20%, 0.9);
+  padding: 0 5% 3% 5%;
+  font-size: 1em;
+  text-align: center;
+}
+
+#status-bar:before {
+  content: '';
+  border: none;
+  background: hsl(135, 80%, 10%);
+
+  position: relative;
+  display: block;
+  top: -7px;
+
+  width: 100%;
+  height: 1px;
+} 
+
+#todo-list {
+  background-color: hsla(135, 20%, 20%, 0.9);
+  color: hsl(36, 50%, 70%);
+  padding: 5% 6%;
+}
+
+.todo:nth-child(2n+1) {
+  background: -webkit-linear-gradient(right, hsl(135, 20%, 20%, 0.9), hsla(120, 20%, 25%), hsl(135, 20%, 20%, 0.9));
+  background: linear-gradient(to right, hsl(135, 20%, 20%, 0.9), hsla(120, 20%, 25%), hsl(135, 20%, 20%, 0.9));
+}
+
+.todo {
+  display: flex;
+  font-size: 1.5em;
+  position: relative;
+  cursor: default;
+}
+
+.todo > span {
+  width: 80%;
+  overflow: hidden;
+}
+
+.todo-completed span {
+  text-decoration: line-through;
+}
+
+.btn-delete {
+  color: hsl(36, 50%, 65%);
+  background: transparent;
+  border: none;
+
+  position: absolute;
+  right: 0;
+  top: 15%;
+
+  font-size: 1em;
+}
+
+.btn-edit {
+  color: hsl(36, 50%, 65%);
+  background: transparent;
+  border: none;
+  position: absolute;
+  right: 7%;
+  top: 17%;
+  font-size: 0.9em;
+}
+
+.rename-todo {
+  background: hsl(36, 50%, 85%);
+  border: 3px solid hsl(0, 0%, 29%) !important;
+  position: absolute;
+  top: -20%;
+  left: 105%;
+  width: 55%;
+  padding: 1% 2%;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 15px;
+}
+
+.rename-todo input[type=text] {
+  border: none;
+  background: none; 
+  color: hsl(0, 0%, 29%);
+  caret-color: hsl(0, 0%, 29%);
+  padding: 0 5% 0 2%;
+  font-size: 0.8em;
+  font-family: KalamRegular;
+}
+
+.rename-todo input[type=text]:focus {
+  outline: none;
+}
+
+.rename-todo button {
+  border: 2px solid hsl(0, 0%, 29%) !important;
+  background: hsl(0, 0%, 29%);
+  color: hsl(36, 50%, 85%);
+
+  position: absolute;
+  top: 18%;
+  left: 70%;
+  
+  padding: 0.2em 0.3em 0.1em 0.3em;
+
+  text-transform: uppercase;
+  font-family: KalamRegular;
+  font-size: 0.6em;
+
+  border-radius: 10px;
+  cursor: pointer;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.2s ease 0s;
+}
+
+.rename-todo button:hover {
+  color: hsl(0, 0%, 30%) !important;
+  background: hsl(0, 0%, 70%);;
+  border: 2px solid hsl(0, 0%, 50%) !important;
+  transition: all 0.2s ease 0s;
+}
+
+/* close button */
+.rename-todo span {
+  color: hsl(0, 60%, 50%);
+  position: absolute;
+  right: 2%;
+  top: 0%;
+  font-size: 0.5em;
+  cursor: pointer;
+}
+
+/* Customize the label (the container) */
+.checkbox-container {
+  display: inline;
+  position: relative;
+  top: 18px;
+  left: 0px;
+  padding-left: 35px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: -11.5px;
+  left: 0;
+  height: 23px;
+  width: 23px;
+  background-color: hsl(36, 50%, 80%);
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkbox-container .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+
+  left: 7px;
+  top: 3px;
+  width: 5px;
+  height: 10px;
+  border: solid hsl(0, 0%, 29%);
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+/* Show the checkmark when checked */
+.checkbox-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.checkbox-container .checkmark:hover {
+  background: hsl(36, 50%, 40%);
+  border: 1px solid hsl(36, 50%, 20%);
+}
+
+@media all and (max-width: 1200px) {
+  .rename-todo {
+    left: 8%;
+    top: -108%;
+    width: 65%;
+    padding: 0;
+  }
+
+  .rename-todo input[type=text] {
+    position: relative;
+    width: 60%;
+    left: 8%;
+  }
+
+  .rename-todo button {
+    top: 10%;
+    left: 70%;
+  }
+}
+
+@media all and (min-width: 800px) {
+  #app {
+    width: 600px;
+    margin: 100px auto 100px auto;
+  }
+
+  .todo > span {
+    max-width: 82%;
+  } 
+}
+
+@media all and (max-width: 800px) {
+  #app {
+    width: 500px;
+    margin: 75px auto 75px auto;
+  }
+}
+
+@media all and (max-width: 600px) {
+  #app {
+    width: 80%;
+    min-width: 480px;
+    margin: 50px auto 50px auto;
+  }
+}

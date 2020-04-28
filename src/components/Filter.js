@@ -23,9 +23,12 @@ function Filter({ filter, setFilter }) {
   }
 
   return (
-    <span className='filter-container'>
-      {links}
-    </span>
+    <div id='filter'>
+      <p>Show:</p>
+      <span>
+        {links}
+      </span>
+    </div>
   )
 }
 
