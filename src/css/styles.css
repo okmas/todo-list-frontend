@@ -210,15 +210,16 @@ body {
 }
 
 .link:hover {
-  text-decoration: underline;
+  text-shadow: 0 0 2px hsl(0, 0%, 60%);
 }
 
 .link-active {
   cursor: default;
+  text-decoration: underline;
 }
 
 .link-active:hover {
-  text-decoration: none;
+  text-shadow: none;
 }
 
 #status-bar {
