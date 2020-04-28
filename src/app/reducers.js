@@ -10,7 +10,6 @@ function todos(state = [], action) {
       //   completed: action.newTodo.completed
       // })];
       // Offline version
-      console.table('state', state);
       return [...state, Object.assign({}, {
         id: (state.length > 0) ? state[state.length-1].id + 1 : 0,
         text: action.newTodo,

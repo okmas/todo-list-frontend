@@ -5,7 +5,7 @@ import TodoItem from './TodoItem'
 function TodoList({todos, idOfEdit, onCheckmarkToggled, onRenameButtonClicked, 
   onDeleteButtonClicked, onEditButtonClicked}) {
   return (
-    <div className='todo-list-container'>
+    <div id='todo-list'>
       {[...todos.map(todo => {
         return <TodoItem key={todo.id} 
                          {...todo}

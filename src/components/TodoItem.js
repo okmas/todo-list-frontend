@@ -22,13 +22,11 @@ class TodoItem extends React.Component {
   }
   
   onMouseEnter = () => {
-    this.setState({ renameButtonVisible: true });
+    this.setState({ renameToggleVisible: true });
   } 
 
   onMouseLeave = () => {
-    this.setState({
-      renameButtonVisible: false
-    });
+    this.setState({ renameToggleVisible: false });
   } 
 
   render() {
@@ -47,19 +45,19 @@ class TodoItem extends React.Component {
           onSubmit={onRenameButtonClicked}
           destroySelf={() => onEditButtonClicked(id)}
         />
-      : <span></span> 
+      : <span style={{display: 'none'}}></span>;
 
-    let renameToggle = (this.state.renameButtonVisible)
+    let renameToggle = (this.state.renameToggleVisible)
       ? <button 
           className='btn-edit'
           onClick={() => onEditButtonClicked(id)}>
-          {'<-'}
+          <i class="fas fa-pen"></i>
         </button>
-      : <span></span>
+        : <span style={{display: 'none'}}></span>;
     
     return (
       <div 
-        className={'todo-container' + ((completed) ? ' todo-completed' : '')}
+        className={'todo' + ((completed) ? ' todo-completed' : '')}
         onMouseEnter={this.onMouseEnter}
         onMouseLeave={this.onMouseLeave}
       >
@@ -71,13 +69,13 @@ class TodoItem extends React.Component {
           />
           <span className='checkmark'></span>
         </label>
-        <p>{text}</p>
+        <span>{text}</span>
         {renameToggle}
         {renameTodo}
         <button 
           className='btn-delete'
           onClick={() => onDeleteButtonClicked(id)}>
-          X
+          <i class="fas fa-times-circle"></i>
         </button>
       </div>
     )
