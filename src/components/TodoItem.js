@@ -4,7 +4,7 @@ import RenameTodo from './RenameTodo';
 
 class TodoItem extends React.Component {
   static propTypes = {
-    id: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired, // string in online version
     text: PropTypes.string.isRequired,
     completed: PropTypes.bool.isRequired,
     showRenameTodo: PropTypes.bool.isRequired,

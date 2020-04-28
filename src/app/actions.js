@@ -1,5 +1,5 @@
-import axios from 'axios'
-import { batchActions } from 'redux-batched-actions'
+// import axios from 'axios'
+// import { batchActions } from 'redux-batched-actions'
 
 // SYNCHRONOUS ACTION CREATORS
 
@@ -73,62 +73,62 @@ export {
 
 // ASYNCHRONOUS ACTION CREATORS
 
-const fetchAllTodos = () => dispatch => 
-  axios.get('http://localhost:8080/todos')
-    .then(res => dispatch(batchActions(res.data.map(todo => addTodo_Sync(todo)))))
-    .catch(error => console.log(error));
+// const fetchAllTodos = () => dispatch => 
+//   axios.get('http://localhost:8080/todos')
+//     .then(res => dispatch(batchActions(res.data.map(todo => addTodo_Sync(todo)))))
+//     .catch(error => console.log(error));
 
-const fetchAllCompletedTodos = () => dispatch => 
-  axios.get('http://localhost:8080/todos')
-    .then(res => console.log('Fetched all completed todos. Not going to do anything with them.', res.data))
-    .catch(error => console.log(error));
+// const fetchAllCompletedTodos = () => dispatch => 
+//   axios.get('http://localhost:8080/todos')
+//     .then(res => console.log('Fetched all completed todos. Not going to do anything with them.', res.data))
+//     .catch(error => console.log(error));
 
-const addTodo = (text) => dispatch => 
-  axios.post('http://localhost:8080/todos', {'text': text})
-    .then(res => dispatch(addTodo_Sync(res.data)))
-    .catch(error => console.log(error));
+// const addTodo = (text) => dispatch => 
+//   axios.post('http://localhost:8080/todos', {'text': text})
+//     .then(res => dispatch(addTodo_Sync(res.data)))
+//     .catch(error => console.log(error));
 
-const renameTodo = (id, newText) => dispatch => 
-  axios.post(`http://localhost:8080/todos/${id}`, {'text': newText})
-    .then(() => dispatch(renameTodo_Sync(id, newText)))
-    .catch(error => console.log(error));
+// const renameTodo = (id, newText) => dispatch => 
+//   axios.post(`http://localhost:8080/todos/${id}`, {'text': newText})
+//     .then(() => dispatch(renameTodo_Sync(id, newText)))
+//     .catch(error => console.log(error));
 
-const deleteTodo = (id) => dispatch => 
-  axios.delete(`http://localhost:8080/todos/${id}`)
-    .then(() => dispatch(deleteTodo_Sync(id)))
-    .catch(error => console.log(error));
+// const deleteTodo = (id) => dispatch => 
+//   axios.delete(`http://localhost:8080/todos/${id}`)
+//     .then(() => dispatch(deleteTodo_Sync(id)))
+//     .catch(error => console.log(error));
 
-const toggleTodo = (id) => (dispatch, getState) => { 
-  let completed = false;
-  getState().todos.forEach(todo => {if (todo.id === id) completed = todo.completed});
-  if (completed) {
-    return dispatch(uncheckTodo(id));
-   } else {
-    return dispatch(checkTodo(id));
-   }
-}
+// const toggleTodo = (id) => (dispatch, getState) => { 
+//   let completed = false;
+//   getState().todos.forEach(todo => {if (todo.id === id) completed = todo.completed});
+//   if (completed) {
+//     return dispatch(uncheckTodo(id));
+//    } else {
+//     return dispatch(checkTodo(id));
+//    }
+// }
 
-const checkTodo = (id) => dispatch => 
-  axios.post(`http://localhost:8080/todos/${id}/complete`)
-    .then(() => dispatch(checkTodo_Sync(id)))
-    .catch(error => console.log(error));
+// const checkTodo = (id) => dispatch => 
+//   axios.post(`http://localhost:8080/todos/${id}/complete`)
+//     .then(() => dispatch(checkTodo_Sync(id)))
+//     .catch(error => console.log(error));
 
-const uncheckTodo = (id) => dispatch => 
-  axios.post(`http://localhost:8080/todos/${id}/incomplete`)
-    .then(() => dispatch(uncheckTodo_Sync(id)))
-    .catch(error => console.log(error));
+// const uncheckTodo = (id) => dispatch => 
+//   axios.post(`http://localhost:8080/todos/${id}/incomplete`)
+//     .then(() => dispatch(uncheckTodo_Sync(id)))
+//     .catch(error => console.log(error));
 
 
 // "ASYNCHRONOUS" ACTION CREATORS FOR THE OFFLINE VERSION
 
-// const fetchAllTodos = () => {};
-// const fetchAllCompletedTodos = () => {};
-// const addTodo = addTodo_Sync;
-// const renameTodo = renameTodo_Sync;
-// const deleteTodo = deleteTodo_Sync;
-// const toggleTodo = toggleTodo_Sync;
-// const checkTodo = checkTodo_Sync;
-// const uncheckTodo = uncheckTodo_Sync;
+const fetchAllTodos = () => {};
+const fetchAllCompletedTodos = () => {};
+const addTodo = addTodo_Sync;
+const renameTodo = renameTodo_Sync;
+const deleteTodo = deleteTodo_Sync;
+const toggleTodo = toggleTodo_Sync;
+const checkTodo = checkTodo_Sync;
+const uncheckTodo = uncheckTodo_Sync;
 
 export {
   fetchAllTodos,

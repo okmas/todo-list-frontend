@@ -23,7 +23,7 @@ function TodoList({todos, idOfEdit, onCheckmarkToggled, onRenameButtonClicked,
 TodoList.propTypes = {
   todos: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired, // string in online version
       text: PropTypes.string.isRequired,
       completed: PropTypes.bool.isRequired
     }).isRequired

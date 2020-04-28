@@ -67,7 +67,7 @@ function MainView({ todos, filter, idOfEdit, toggleTodo, renameTodo, deleteTodo,
 MainView.propTypes = {
   todos: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired, // string in online version
       text: PropTypes.string.isRequired,
       completed: PropTypes.bool.isRequired
     }).isRequired
