@@ -23,6 +23,8 @@ implemented React components, which have no „clue” about React, meaning they
 this one is the only component that splits the pattern.)
 - Representational: all the other ones
 
+To see the component design structure, see component-diagram.png.
+
 Frameworks and libraries used
 -----------------
 - `react`
